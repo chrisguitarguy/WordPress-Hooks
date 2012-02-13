@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<table class="table zebra-striped bordered-table">
+    <thead>
+        <tr>
+            <th>Hook Name</th>
+            <th>Type</th>
+            <th>File</th>
+            <th>Line</th>
+            <th>Args</th>
+            <th>Browse</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for hook in hooks %}
+        <tr class="{{ hook.type }}">
+            <td>{{ hook.hook }}</td>
+            <td>{{ hook.type }}</td>
+            <td>{{ hook._file }}</td>
+            <td>{{ hook._line }}</td>
+            <td>{{ hook.params }}</td>
+            <td><a href="{{ hook.browse_link }}" class="external">Browse</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

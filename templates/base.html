@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-us">
+<head>
+    <title>WordPress Hooks | ChristopherDavis.me</title>
+    <meta name="description" content="Visit ChristopherDavis.me to find a list of all the WordPress hooks" />
+    <link rel="stylesheet" type="text/css" href="http://christopherdavis.me/css/bootstrap.css" />
+    <style type="text/css">
+        header h1, header p {
+            text-align:center;
+            margin-top:20px;
+        }
+    </style>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function(){
+            jQuery('header p a').click(function(e){
+               e.preventDefault();
+               var rel = jQuery(this).attr('rel');
+               jQuery('table tbody tr').hide();
+               if('all' != rel){
+                   jQuery('table tbody tr').hide();
+                   jQuery('table tbody tr.' + rel).show();
+               } else {
+                   jQuery('table tbody tr').show()
+               }
+            });
+            jQuery('a.external').attr('target', '_blank');
+        });
+    </script>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-28993706-1']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>WordPress Hooks</h1>
+            <p><a href="#action" rel="action">Action</a> | <a href="#filter" rel="filter">Filter</a> | <a href="#all" rel="all">All</a></p>
+        </header>
+        {% block content %}
+            
+        {% endblock %}
+        <footer class="footer">
+            <p>Brought to you by <a href="http://christopherdavis.me">Christopher Davis</a>.</p>
+        </footer>
+    </div>
+</body>
+</html>
