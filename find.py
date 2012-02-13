@@ -1,3 +1,4 @@
+import hashlib
 import os
 import re
 
@@ -32,6 +33,11 @@ class Hook(object):
     def browse_link(self):
         return '{trac}{file}#L{line}'.format(trac=self.trac_base, 
                                        file=self._file, line=self._line)
+    
+    @property
+    def hash_id(self):
+        m = hashlib.md5('{}:{}:{}'.format(self.hook, self._file, self._line))
+        return m.hexdigest()
         
 
 def find_files():
@@ -51,7 +57,7 @@ def search_file(path):
     """
     Search a given file for do_action and apply_filters function calls.
     """
-    regex = re.compile(r'((do_action|apply_filters)\(([^)]+)\);)', re.I)
+    regex = re.compile(r'((do_action|apply_filters)(_ref_array)?\((.+)\);)', re.I)
     rv = []
     with open(path) as f:
         for line, text in enumerate(f.readlines()):
@@ -90,7 +96,7 @@ def main():
     hooks = find_hooks()
     hooks = hooks_to_objects(hooks)
     t = env.get_template('list.html')
-    out = t.render(hooks=hooks)
+    out = t.render(hooks=hooks, total=len(hooks))
     with open('index.html', 'w') as f:
         f.write(out)
 

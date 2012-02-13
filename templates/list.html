@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<p>This list of WordPress hooks was generated with a small Python script and contains {{ total }} hooks. There are some duplicate hook names.  In the cases where the hook name was passed into <code>do_action</code> or <code>apply_filters</code> as a variable, you'll see a vague <code>$some_variable</code> as the hook name.</p>
 <table class="table zebra-striped bordered-table">
     <thead>
         <tr>
@@ -14,8 +15,8 @@
     </thead>
     <tbody>
     {% for hook in hooks %}
-        <tr class="{{ hook.type }}">
-            <td>{{ hook.hook }}</td>
+        <tr class="{{ hook.type }}" id="{{ hook.hash_id }}">
+            <td>{{ hook.hook }} <a href="#{{ hook.hash_id }}">#</a></td>
             <td>{{ hook.type }}</td>
             <td>{{ hook._file }}</td>
             <td>{{ hook._line }}</td>
