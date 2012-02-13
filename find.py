@@ -22,7 +22,7 @@ class Hook(object):
         else:
             self.type = 'filter'
         hookstuff = [i.strip() for i in match_data[-1].split(',')]
-        self.hook = hookstuff[0]
+        self.hook = hookstuff[0].strip("'").strip('"')
         self.params = ', '.join(hookstuff[1:])
     
     def __repr__(self):
