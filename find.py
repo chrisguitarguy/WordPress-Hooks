@@ -33,8 +33,6 @@ class Hook(object):
         return '{trac}{file}#L{line}'.format(trac=self.trac_base, 
                                        file=self._file, line=self._line)
         
-        
-    
 
 def find_files():
     """
@@ -47,6 +45,7 @@ def find_files():
             if f.endswith('.php'):
                 rv.append(os.path.join(path, f))
     return rv
+
 
 def search_file(path):
     """
@@ -62,6 +61,7 @@ def search_file(path):
                 rv.append((_path, line+1, match.groups()))
     return rv
 
+
 def find_hooks():
     """
     Combination of find_files() and search_files().  Find every hook, 
@@ -71,6 +71,7 @@ def find_hooks():
     for f in find_files():
         rv += search_file(f)
     return rv
+
 
 def hooks_to_objects(hook_list):
     """
@@ -82,6 +83,7 @@ def hooks_to_objects(hook_list):
     rv.sort(key=lambda h: h.hook)
     return rv
 
+
 def main():
     loader = jinja2.FileSystemLoader(TEMPLATES)
     env = jinja2.Environment(loader=loader)
@@ -91,6 +93,7 @@ def main():
     out = t.render(hooks=hooks)
     with open('index.html', 'w') as f:
         f.write(out)
+
 
 if __name__ == '__main__':
     main()
