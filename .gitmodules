@@ -1,0 +1,3 @@
+[submodule "trunk"]
+	path = trunk
+	url = git://github.com/markjaquith/WordPress.git
