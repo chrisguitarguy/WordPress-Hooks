@@ -12,7 +12,7 @@ class Hook(object):
     """
     Container for the a WordPress hook.
     """
-    trac_base = 'http://core.trac.wordpress.org/browser/trunk'
+    trac_base = 'https://github.com/markjaquith/WordPress/blob/master'
     
     def __init__(self, file, line, match_data):
         self._file = file
