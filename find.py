@@ -1,3 +1,4 @@
+import argparse
 import hashlib
 import os
 import re
@@ -91,13 +92,18 @@ def hooks_to_objects(hook_list):
 
 
 def main():
+    parser = argparse.ArgumentParser(description='Create a directory of '
+        'all wordpress hooks')
+    parser.add_argument('-o', '--out', help='output file', 
+        dest='outfile',  default='index.html')
+    args = parser.parse_args()
     loader = jinja2.FileSystemLoader(TEMPLATES)
     env = jinja2.Environment(loader=loader)
     hooks = find_hooks()
     hooks = hooks_to_objects(hooks)
     t = env.get_template('list.html')
     out = t.render(hooks=hooks, total=len(hooks))
-    with open('index.html', 'w') as f:
+    with open(args.outfile, 'w') as f:
         f.write(out)
 
 
